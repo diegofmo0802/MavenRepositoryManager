@@ -1,0 +1,39 @@
+.UserCard {
+    align-items: center;
+    justify-content: start;
+    background: #FFB4DC;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    min-width: 400px;
+    width: 50%;
+}
+.UserCard > .UserCard-Card {
+    /* pointer-events: none; */
+    aspect-ratio: 2 / 1;
+    width: 100%;
+    pointer-events: none;
+    max-width: 100%;
+}
+.UserCard > .UserCard-Notice {
+    padding: 0.25em;
+    margin-top: 0.25em;
+    background: #FFFFFF44;
+    border-radius: 0.5em;
+    font-size: 1em;
+    height: 1.5em;
+    transition: scale 250ms, height 200ms;
+}
+.UserCard > .UserCard-Notice[show='false'] {
+    scale: 0;
+    height: 0;
+}
+.UserCard > .UserCard-Buttons > .UserCard-Download,
+.UserCard > .UserCard-Buttons > .UserCard-Copy {
+    margin-top: 0.5em;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    color: #000000;
+    background: #B4DCFF;
+    margin: 0.5em
+}

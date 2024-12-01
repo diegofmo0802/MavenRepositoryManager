@@ -1,0 +1,45 @@
+.Form {
+    min-width: 400px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    Background: #B4DCFF;
+    Border: 2px solid #00B4FF;
+    Border-radius: 0.3rem;
+    Color: #000000;
+    padding: 2rem;
+}
+.Form > .Form-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.Form > .Form-fields {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.Form > .Form-fields > input {
+    border: #000000 1px solid;
+    border-radius: 0.25rem;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+}
+.Form > .Login-button,
+.Form > .Register-button {
+    background: #0000FF88;
+    color: #FFFFFF;
+    border-radius: 0.3rem;
+    margin: 0 0.2rem;
+    padding: 0.5rem;
+    min-width: 5rem;
+}
+.Form > .Register-button { background: #008800; }
+
+@media (max-width: 400px) {
+    .Form {
+        min-width: auto;
+        width: 100%;
+        margin: 0.5em;
+    }
+}

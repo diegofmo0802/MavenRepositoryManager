@@ -1,0 +1,17 @@
+# Build and lib folders
+**/node_modules
+**/build
+
+# Log and enviroment files
+**/*.log
+**/*.env
+
+# All files/folders when start for .
+**/.**
+# Allowed files/folders
+!.gitignore
+
+# Dependencies of repositories
+src/DBManager
+client/logic/src/WebApp
+client/logic/src/QR-Code

@@ -1,0 +1,37 @@
+{
+  "name": "my-maven-repo",
+  "description": "an GUI/api to upload jar files in maven repo",
+  "keywords": [
+    "maven",
+    "source",
+    "repo",
+    "GUI"
+  ],
+  "version": "1.0.0",
+  "type": "module",
+  "main": "build/server.js",
+  "scripts": {
+    "start": "node build/server.js",
+    "build": "bash build.bash",
+    "dependencies": "bash dependencies.bash"
+  },
+  "author": {
+    "name": "diegofmo0802",
+    "email": "diegofmo0802@gmail.com",
+    "url": "https://diegofmo0802.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diegofmo0802/MyMavenRepo"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "mongodb": "^6.11.0",
+    "saml.servercore": "^3.7.0-Dev.13",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "typescript": "^5.5.3"
+  }
+}

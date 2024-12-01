@@ -1,0 +1,177 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* position: absolute; */
+    /* overflow: hidden; */
+    padding: var(--spacing-medium);
+}
+
+.profile > .gallery {
+    align-items: flex-start;
+    margin-bottom: auto;
+    max-width: var(--max-width);
+    width: 100%;
+}
+
+.profile > .view-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--main-bg-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-medium);
+    max-width: var(--max-width);
+    margin: var(--spacing-medium) auto;
+    flex: 0 0 auto;
+    overflow: hidden;
+    width: 100%;
+}
+
+.profile > .view-profile > .view-profile-avatar {
+    width: 100px;
+    border-radius: 50%;
+    margin-bottom: var(--spacing-small);
+}
+
+.profile > .edit-profile > .view-profile-username > input,
+.profile > .view-profile > .view-profile-username {
+    font-size: var(--font-size-large);
+    font-weight: bold;
+    margin: var(--spacing-small) 0;
+    text-align: center;
+}
+
+.profile > .edit-profile > .view-profile-biography > textarea,
+.profile > .view-profile > .view-profile-biography {
+    font-size: var(--font-size-medium);
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: var(--spacing-small);
+    text-wrap: balance;
+    overflow: hidden;
+    position: relative;
+    width: calc(100% - (var(--spacing-small) * 2));
+    word-break: break-word;
+    text-overflow: ellipsis;
+    max-height: 4lh;
+    white-space: pre-wrap;
+}
+
+.profile > .view-profile[bio-elipsis="true"] > .view-profile-biography::after {
+    content: '...';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: var(--font-size-small);
+    color: var(--text-color-light);
+    background: var(--main-bg-color);
+    width: 3ch;
+}
+
+.profile > .view-profile > .view-profile-role {
+    font-size: var(--font-size-small);
+    color: var(--text-color-light);
+    text-align: center;
+    margin-bottom: var(--spacing-small);
+}
+
+.profile > .view-profile > .view-profile-options {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-small);
+}
+
+.profile > .view-profile > .view-profile-options > button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 0.3rem;
+    padding: var(--spacing-small) var(--spacing-medium);
+    cursor: pointer;
+    margin: calc(var(--spacing-small) / 2);
+    transition: background-color 0.3s;
+}
+
+.profile > .view-profile > .view-profile-options > button:hover {
+    filter: brightness(0.8);
+}
+
+.profile > .view-profile > .view-profile-options > .view-profile-share-button {
+    background-color: var(--share-color);
+}
+
+.profile > .edit-profile > .view-profile-avatar {
+    padding: 0;
+}
+
+.profile > .edit-profile > .view-profile-username > input,
+.profile > .edit-profile > .view-profile-biography > textarea {
+    border: none;
+    background: var(--main-over-bg-color);
+    border-radius: 0.25rem;
+    padding: 0;
+    margin: 0;
+}
+
+.profile > .edit-profile > .view-profile-biography > textarea {
+    overflow: auto;
+    min-height: 1lh;
+    resize: vertical;
+}
+.profile > .edit-profile > .view-profile-options > .edit-profile-save-button {
+    background-color: var(--save-color);
+}
+.profile > .edit-profile > .view-profile-options > .edit-profile-cancel-button {
+    background-color: var(--cancel-color);
+}
+
+.profile > .share-window {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000088;
+    z-index: 1000;
+}
+
+.profile > .share-window > .close {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    border-radius: 50%;
+    padding: 2%;
+    border: #FFFFFF solid 1px;
+    background: #FF446C;
+    color: #000000;
+    cursor: pointer;
+}
+
+.profile > .share-window > .qr-code {
+    width: 40%;
+    min-width: 200px;
+    max-width: 300px;
+}
+
+.profile > .share-window > .url-text {
+    background: #FFB4FC;
+    color: #000000;
+    padding: 0.5em;
+    margin: 0.5em;
+    user-select: all;
+}
+
+@media (max-width: 300px) {
+    .profile > .share-window > .qr-code {
+        min-width: auto;
+        overflow: hidden;
+        width: 95%;
+    }
+}

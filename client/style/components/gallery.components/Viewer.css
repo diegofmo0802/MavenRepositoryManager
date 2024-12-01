@@ -1,0 +1,160 @@
+.gallery-viewer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-large);
+    gap: var(--spacing-large);
+    max-width: var(--max-width);
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-viewer > .gallery-viewer-back {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: var(--spacing-small);
+    background-color: var(--overlay-bg-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 0.5px solid #fff;
+    transition: background-color 0.3s ease;
+}
+
+.gallery-viewer > .gallery-viewer-back:hover {
+    background-color: var(--overlay-hover-bg-color);
+}
+
+.gallery-viewer > .gallery-viewer-image {
+    aspect-ratio: 16 / 9;
+    background: var(--image-bg-color);
+    border: 2px solid #000;
+    clip-path: inset(2px);
+    object-fit: cover;
+    width: 75%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-viewer > .gallery-viewer-info {
+    min-width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-large);
+    padding: var(--spacing-large);
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-viewer > .gallery-viewer-info > .gallery-viewer-info-user {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-large);
+}
+
+.gallery-viewer > .gallery-viewer-info > .gallery-viewer-info-user > .gallery-viewer-info-user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: var(--avatar-bg-color);
+}
+
+.gallery-viewer > .gallery-viewer-info > .gallery-viewer-info-user > .gallery-viewer-info-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium);
+}
+
+.gallery-viewer > .gallery-viewer-info > .gallery-viewer-info-user > .gallery-viewer-info-user-info > .gallery-viewer-info-user-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.gallery-viewer > .gallery-viewer-info > .gallery-viewer-info-user > .gallery-viewer-info-user-info > .gallery-viewer-info-user-role {
+    font-size: 1rem;
+    color: #666;
+}
+
+.gallery-viewer > .gallery-viewer-info > h1 {
+    font-size: 2rem;
+    margin: 0;
+    text-align: center;
+}
+
+.gallery-viewer > .gallery-viewer-info > p {
+    font-size: 1rem;
+    color: var(--text-color-dark);
+    margin: var(--spacing-medium) 0;
+    text-align: justify;
+}
+
+/* Media Queries */
+@media screen and (max-width: 475px) {
+    .gallery > .picturePreview {
+        flex: 0 0 100%;
+    }
+}
+@media (max-width: 1024px) {
+    .gallery-viewer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .gallery-viewer > .gallery-viewer-image,
+    .gallery-viewer > .gallery-viewer-info {
+        width: 100%;
+    }
+
+    .gallery-viewer > .gallery-viewer-image {
+        margin-bottom: var(--spacing-large);
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery-viewer {
+        padding: var(--spacing-medium);
+    }
+
+    .gallery-viewer > .gallery-viewer-info {
+        padding: var(--spacing-medium);
+    }
+
+    .gallery-viewer > .gallery-viewer-info > .gallery-viewer-info-user > .gallery-viewer-info-user-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .gallery-viewer > .gallery-viewer-info > .gallery-viewer-info-user > .gallery-viewer-info-user-info > .gallery-viewer-info-user-name {
+        font-size: 1rem;
+    }
+
+    .gallery-viewer > .gallery-viewer-info > h1 {
+        font-size: 1.5rem;
+    }
+
+    .gallery-viewer > .gallery-viewer-info > p {
+        font-size: 0.875rem;
+    }
+
+    .gallery-viewer > .gallery-viewer-back {
+        width: 30px;
+        height: 30px;
+        font-size: 0.75rem;
+    }
+}

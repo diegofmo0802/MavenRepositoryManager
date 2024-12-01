@@ -1,0 +1,103 @@
+.Loading {
+    --Background-color: rgba(0,0,0,1);
+    --Line-height: 10%;
+    align-items: center;
+    background: rgba(0,0,0,0.75);
+    border: rgba(255,255,0,1) 2px solid;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0em;
+    position: absolute;
+    top: 0em;
+    width: 100%;
+    z-index: 5;
+}
+.Loading[solid] {
+    background: var(--Background-color);
+}
+.Loading > div {
+    align-items: center;
+    /* animation: Desvanecer var(--Tiempo,250ms) linear 0s 1 reverse; */
+    background: var(--Background-color,rgba(0,0,0,1));
+    /* border: rgba(255,0,0,1) 2px solid; */
+    border-radius: 50%;
+    box-shadow: var(--Background-color,rgba(0,0,0,1)) 0em 0em 0em 2vw,
+                rgba(255,180,220) 0em 0em 2vw 2vw;
+    display: flex;
+    justify-content: center;
+    padding: var(--Content-margin, 1%);
+    position: relative;
+    width: 40%;
+}
+.Loading > div > img {
+    aspect-ratio: 1 / 1;
+    background: var(--Background-color,rgba(0,0,0,1));
+    /* border: rgba(0,255,0,1) 2px solid; */
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+.Loading > div > span {
+    align-items: center;
+    background: var(--Background-color,rgba(0,0,0,1));
+    /* border: rgba(0,0,255,1) 2px solid; */
+    border-radius: 50%;
+    display: flex;
+    height: calc(100% - ((var(--Content-margin, 1%) * 5) / 1.5));
+    justify-content: center;
+    position: absolute;
+    width: calc(100% - ((var(--Content-margin, 1%) * 5) / 1.5));
+}
+.Loading > div > span:last-of-type {
+    height: calc(100% - ((var(--Content-margin, 1%) * 5) / 3));
+    width: calc(100% - ((var(--Content-margin, 1%) * 5) / 3));
+}
+
+.Loading > div::before,
+.Loading > div > span::before,
+.Loading > div::after,
+.Loading > div > span::after {
+    /* border: rgba(0,255,0,1) 2px solid; */
+    background: rgba(255,0,0,1);
+    content: '';
+    position: absolute;
+}
+
+
+.Loading > div::before,
+.Loading > div > span::before {
+    height: var(--Line-height, 10%);
+    width: 100%;
+}
+.Loading > div::after,
+.Loading > div > span::after {
+    height: 100%;
+    width: var(--Line-height, 10%);
+}
+.Loading > div > span::before,
+.Loading > div > span::after {
+    background: linear-gradient(90deg, #FFB4DC, #00B4FF);
+}
+.Loading > div > span:last-of-type:before,
+.Loading > div > span:last-of-type:after {
+    background: linear-gradient(90deg, rgba(180,255,0,1), #B4DCFF);
+}
+.Loading > div::before,
+.Loading > div::after {
+    background: linear-gradient(90deg, #DCFFB4, #FF00B4);
+}
+.Loading > div > span::after             {background: linear-gradient(#00B4FF, #FFB4DC);}
+.Loading > div > span:last-of-type:after {background: linear-gradient(#B4DCFF, #B4FF00);}
+.Loading > div::after                    {background: linear-gradient(#FF00B4, #DCFFB4);}
+.Loading > div::before                    {animation: rotate 1s linear 0s infinite reverse;}
+.Loading > div > span::before             {animation: rotate 2s linear 0s infinite;}
+.Loading > div::after                     {animation: rotate 6s linear 0s infinite reverse;}
+.Loading > div > span::after              {animation: rotate 5s linear 0s infinite;}
+.Loading > div > span:last-of-type:before {animation: rotate 3s linear 0s infinite reverse;}
+.Loading > div > span:last-of-type:after  {animation: rotate 4s linear 0s infinite;}
+@keyframes rotate {
+    0%   {transform: rotate(0deg);  }
+    100% {transform: rotate(360deg);}
+}

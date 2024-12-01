@@ -1,0 +1,27 @@
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .file-input-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .file-input-wrapper.valid .file-input-label {
+    background-color: #28a745;
+  }
+  
+  .file-input-wrapper.invalid .file-input-label {
+    background-color: #dc3545;
+  }
+  
+  .file-input-label:hover {
+    background-color: #0056b3;
+  }
+  

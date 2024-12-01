@@ -1,0 +1,115 @@
+import Loading from '../basic.components/Loading.js';
+import Api from '../../api/Api.js';
+import { Element, Events, Component, Utilities } from  '../../WebApp/WebApp.js';
+
+export class Gallery extends Component<'div', Gallery.EventMap> {
+    protected component: Element<'div'>;
+    protected endMessage: Element<'div'>;
+    protected loading: Loading;
+    protected postElements: Element<'div'>[] = [];
+    public posts: Api.Posts.data[] = []
+    public constructor(posts: Api.Posts.data[] = []) { super();
+        this.loading = new Loading('./client/src/logo.svg');
+        this.endMessage = this.newPreview({
+            _id: '00000000-0000-0000-0000-000000000000',
+            image: '/logo.png',
+            title: 'No more posts',
+            user: {
+                _id: '00000000-0000-0000-0000-000000000000',
+                profile: { username: 'system' }
+            }
+        });
+        this.endMessage.HTMLElement.style.background = 'red;';
+        this.component = Element.structure({ type: 'div', attribs: { class: 'gallery' } });
+        if (posts.length > 0) this.addPosts(posts, true);
+    }
+    /**
+     * that define if the "end" event is able to dispatch a time more;
+    */
+    public useOnceEndDispatcher = Utilities.debounce((): void => {
+        if (this.postElements.length === 0) return;
+        const finalPostElement = this.postElements[this.postElements.length - 1];
+        const endHandler = () => {
+            this.dispatch('end');
+        };
+        finalPostElement.observer.offOnce('visible', endHandler);
+        finalPostElement.observer.once('visible', endHandler);
+    }, 1000);
+    public async addPosts(posts: Api.Posts.data[], checkToContinue: boolean = false): Promise<Element<'div'>[]> {
+        this.posts.push(...posts);
+        const childs = posts.map(this.newPreview.bind(this));
+        this.postElements.push(...childs);
+        if (!checkToContinue) {
+            this.component.append(...childs); return childs;
+        } 
+        return await Promise.all(childs.map((child) => {
+            return new Promise<Element<'div'>>((resolve) => {
+                child.observer.on('add', () => resolve(child));
+                this.component.append(child);
+            });
+        }));
+    }
+    /**
+     * Show or hide the end message.
+     * @param show If true, the end message will be shown.
+     */
+    public showEndMessage(show: boolean = true): void {
+        if (show) this.endMessage.appendTo(this.component);
+        else this.endMessage.remove();
+    }
+    /**
+     * Show or hide the loading message.
+     * @param show If true, the loading message will be shown.
+     */
+    public showLoading(show: boolean = true, scrollTo: boolean = false): void {
+        if (!show) return this.loading.finish();
+        this.loading.spawn(this.component)
+    }
+    protected newPreview(post: Api.Posts.data): Element<'div'> {
+        const {
+            image: src, title, peoples,
+            user: { profile: { username } }, 
+        } = post;
+        const preview = Element.structure({ type: 'div', attribs: { class: 'picturePreview' }});
+        preview.append(
+            { type: 'img', attribs: { src, class: 'picturePreview-image' } },
+            { type: 'h2', text: title, attribs: { class: 'picturePreview-title' } },
+            { type: 'div', attribs: { class: 'picturePreview-info' }, childs: [
+                { type: 'h2', text: title, attribs: { class: 'picturePreview-title' } },
+                { type: 'span', attribs: { class: 'picturePreview-user' }, text: username },
+                { type: 'span', attribs: { class: 'picturePreview-peoples' }, text: peoples?.join(', ') ?? '' }
+            ] }, this.newOverlay(preview)
+        ).on('click', () => {
+            if (preview === this.endMessage) return;
+            this.dispatch('select', post);
+        });
+        return preview
+    }
+    protected newOverlay(preview: Element<'div'>): Element<'div'> {
+        return Element.structure({ type: 'div', attribs: { class: 'picturePreview-overlay'}, childs: [
+            { type: 'button', text: 'show info', attribs: { class: 'picturePreview-overlay-button' }, events: {
+                click: (event: MouseEvent) => {
+                    event.stopPropagation();
+                    this.toggleInfo(preview);
+            } } }
+        ] });
+    }
+    protected toggleInfo(preview: Element<'div'>) {
+        if (preview.HTMLElement.classList.contains('showInfo')) {
+            preview.HTMLElement.classList.remove('showInfo');
+        } else {
+            preview.HTMLElement.classList.add('showInfo');
+        }
+    }
+}
+
+export namespace Gallery {
+    export type SelectListener = (post: Api.Posts.data) => void;
+    export type EndListener = () => void;
+    export type EventMap = {
+        select: SelectListener;
+        end: EndListener;
+    }
+}
+
+export default Gallery;

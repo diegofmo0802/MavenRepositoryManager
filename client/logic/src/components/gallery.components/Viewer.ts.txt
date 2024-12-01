@@ -1,0 +1,52 @@
+import Api from '../../api/Api.js';
+import { Element, Events, Component } from  '../../WebApp/WebApp.js';
+
+export class Viewer extends Component<'div', Viewer.EventMap> {
+    protected component: Element<'div'>;
+    protected closeButton: Element<'button'>;
+    public constructor(public post: Api.Posts.data) { super();
+        this.closeButton = Element.new('button').text('x').setAttribute('class', 'gallery-viewer-back')
+        this.component = Element.structure({
+            type: 'div', attribs: { class: 'gallery-viewer' }, childs: [
+                this.closeButton,
+                { type: 'img', attribs: { class: 'gallery-viewer-image', src: post.image }},
+                { type: 'div', attribs: { class: 'gallery-viewer-info' }, childs: [
+                    this.newUserInfo(post.user),
+                    { type: 'h1', text: post.title },
+                    { type: 'p', text: post.description },
+                    { type: 'p', text: `tags: ${post.tags?.join(', ') ?? 'none'}` },
+                    { type: 'p', text: `place: ${post.place ?? 'unknown'}` },
+                    { type: 'p', text: `with: ${post.peoples?.join(', ') ?? 'none'}`},
+                ]}
+            ]
+        });
+
+        this.closeButton.on('click', () => {
+            this.dispatch('close');
+        });
+    }
+    protected newUserInfo(user: Api.Users.visible): Element<'div'> {
+        return Element.structure({type: 'div', attribs: { class: 'gallery-viewer-info-user' }, childs: [
+            { type: 'img', attribs: { class: 'gallery-viewer-info-user-avatar', src: user.profile.avatar ?? '/client/src/logo.svg' }},
+            { type: 'div', attribs: { class: 'gallery-viewer-info-user-info', }, childs: [
+                { type: 'h2', attribs: { class: 'gallery-viewer-info-user-name' },  text: user.profile.username },
+                { type: 'span', attribs: {class: 'gallery-viewer-info-user-role' }, text: `role: ${user.profile.role ?? 'user'}` }
+            ]}
+        ], events: { click: () => { this.dispatch('profile', user); } } });
+    }
+    public useClose(state: boolean = true) {
+        if (state) this.closeButton.HTMLElement.style.display = 'block';
+        else this.closeButton.HTMLElement.style.display = 'none';
+    }
+}
+
+export namespace Viewer {
+    export type Listener = () => void;
+    export type ProfileListener = (user: Api.Users.visible) => void;
+    export type EventMap = {
+        close: Listener;
+        profile: ProfileListener;
+    }
+}
+
+export default Viewer;

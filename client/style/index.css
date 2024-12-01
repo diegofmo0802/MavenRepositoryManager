@@ -1,0 +1,49 @@
+@import './base.css';
+@import './components.css';
+
+#menu {
+    align-items: center;
+    display: flex;
+    height: var(--Menu-height);
+    left: 0;
+    padding: 0 1rem;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    > .Logo {
+        cursor: pointer;
+        flex: 0 0 auto;
+    }
+    > #menuOptions {
+        flex: 1 1 auto;
+        display: flex;
+        height: 2rem;
+        justify-content: end;
+        > button {
+            flex: 0 0 auto;
+            margin: 0 0.1rem;
+            padding: 0.5rem;
+        }
+    }
+    > #session:not(:empty) {
+        margin-left: 1rem;
+    }
+}
+
+#content {
+    background: var(--light-content-bg) ;
+    height: calc(100% - var(--Menu-height) - (var(--Content-margin) * 2));
+    width: calc(100% - (var(--Content-margin) * 2));
+    left: 0;
+    top: 4rem;
+    margin: var(--Content-margin);
+    position: absolute;
+    overflow: auto;
+}
+
+@media screen and (max-width: 475px) {
+    #menu > .Logo > p {
+        display: none;
+    }
+}

@@ -1,0 +1,121 @@
+import { Element, Events, Component } from "../../WebApp/WebApp.js";
+import Api from "../../api/Api.js";
+import Gallery from "./Gallery.js";
+import EditProfileForm from "../forms/EditProfileForm.js";
+import UserCard from "./UserCard.js";
+
+class Profile extends Component<'div', Profile.EventMap> {
+    protected component: Element<"div">;
+    public readonly gallery: Gallery;
+    protected user: Api.Users.visible;
+    protected isOwner: boolean;
+    protected profile: Element<"div">;
+    public constructor(user: Api.Users.visible, posts: Api.Posts.data[] | Gallery = [], ownerOptions: boolean = false) { super();
+        this.user = user;
+        this.isOwner = ownerOptions;
+
+        if (posts instanceof Gallery) this.gallery = posts;
+        else this.gallery = new Gallery(posts);
+
+        this.profile = this.userInfo();
+        this.component = Element.structure({
+            type: 'div', attribs: { class: 'profile' }, childs: [
+                this.profile,
+                this.gallery.getComponent()
+            ]
+        });
+
+        this.gallery.on('select', (post: Api.Posts.data) => {
+            this.dispatch('select', post);
+        });
+    }
+    protected userInfo(): Element<"div"> {
+        const profile = this.user.profile;
+        const bio = Element.new('p', profile.biography ?? '').setAttribute('class', 'view-profile-biography');
+        const options =  Element.new('div').setAttribute('class', 'view-profile-options');
+        const view = Element.structure({ type: 'div', attribs: { class: 'view-profile' }, childs: [
+            {  type: 'img',  attribs: { 
+                class: 'avatar view-profile-avatar', 
+                src: profile.avatar ?? '/client/src/logo.svg' 
+            }  },
+            { type: 'h1',  text: profile.username, attribs: { class: 'view-profile-username' } },
+            bio,
+            { type: 'p', text: `Role: ${profile.role ?? 'user'}`, attribs: { class: `view-profile-role role-${profile.role ?? 'user'}` } },
+            options
+        ] });
+        options.append(...this.userOptions(), ...this.ownerOptions());
+        view.observer.on('add', () => {
+            if (this.checkOverflow(bio)) view.setAttribute('bio-elipsis', 'true');
+            else view.removeAttribute('bio-elipsis');
+        });
+        return view;
+    }
+    protected checkOverflow(element: Element<any>) {
+        return (
+            element.scrollHeight > element.clientHeight
+            || element.scrollWidth > element.clientWidth
+        );
+    }
+    protected ownerOptions(): Element<"button">[] {
+        const options: Element<"button">[] = [];
+        if (this.isOwner) {
+            options.push(
+                Element.new('button').text('edit')
+                .setAttribute('class', 'view-profile-edit-button')
+                .on('click', () => this.editProfile())
+            );
+        }
+        return options;
+    }
+    public userOptions(): Element<"button">[] {
+        const options: Element<"button">[] = [];
+        options.push(
+            Element.new('button').text('share')
+            .setAttribute('class', 'view-profile-share-button')
+            .on('click', () => {
+                this.share();
+            })
+        );
+        return options;
+    }
+    public share() {
+        const card = new UserCard(this.user);
+        const close = Element.new('button').setAttribute('class', 'close');
+        const shareWindow = Element.new('div').setAttribute('class', 'share-window');
+
+        shareWindow.append(close, card);
+        shareWindow.appendTo(this.component);
+
+        close.on('click', () => {
+            shareWindow.remove();
+        });
+    }
+    public showInfo() {
+        const userInfo = this.userInfo();
+        this.profile.replaceWith(userInfo);
+        this.profile = userInfo;
+    }
+    public editProfile() {
+        const editProfile = new EditProfileForm(this.user);
+        editProfile.on('cancel', () => this.showInfo());
+        editProfile.on('success', (user: Api.Users.visible) => {
+            this.user = user;
+            this.showInfo();
+            this.dispatch('edit', user);
+        });
+        this.profile.replaceWith(editProfile);
+        this.profile = editProfile.getComponent();
+    }
+}
+
+export namespace Profile {
+    export type Options = 'config';
+    export type SelectOptionListener = (option: Options, user: Api.Users.visible) => void;
+    export type EventMap = {
+        select: Gallery.SelectListener;
+        option: SelectOptionListener;
+        edit: EditProfileForm.Listener;
+    }
+}
+
+export default Profile;

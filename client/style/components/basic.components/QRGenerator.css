@@ -1,0 +1,26 @@
+.QRGenerator {
+    align-items: center;
+    justify-content: start;
+    background: #FFB4DC;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    width: 200px;
+}
+.QRGenerator > .QRGenerator-Viewer {
+    /* pointer-events: none; */
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 100%;
+}
+.QRGenerator > .QRGenerator-Error {
+    color: red;
+    margin-top: 0.5em;
+}
+.QRGenerator > .QRGenerator-Download {
+    margin-top: 0.5em;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    color: #000000;
+    background: #B4DCFF;
+}

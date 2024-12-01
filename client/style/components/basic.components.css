@@ -1,0 +1,47 @@
+@import './basic.components/LiveImageInput.css';
+@import './basic.components/Loading.css';
+@import './basic.components/MultiTagInput.css';
+@import './basic.components/SelectInput.css';
+@import './basic.components/SwitchInput.css';
+@import './basic.components/TextInput.css';
+@import './basic.components/QRGenerator.css';
+@import './basic.components/FileInput.css';
+
+/* Button() */
+.Button {
+    border: none;
+    outline-style: none;
+    cursor: pointer;
+}
+.Button:hover {
+    filter: brightness(0.9);
+}
+.Button:disabled {
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+.Button:active {
+    filter: brightness(0.8);
+}
+/* Logo() */
+.Logo {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    > img {
+        height: 100%;
+        padding: 0 1rem 0 0;
+    }
+    > span, > p, h1 {
+        color: var(--Logo-color, #FFFFFF);
+        font-size: 1.75rem;;
+    }
+}
+/* avatar */
+.avatar {
+    aspect-ratio: 1 / 1;
+    background: #00000088;
+    border: #FFB4DC 2px solid;
+    border-radius: 50%;
+    object-fit: cover;
+}

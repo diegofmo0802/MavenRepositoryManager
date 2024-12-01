@@ -1,0 +1,65 @@
+<div style="
+  background: #000000;
+  color: #FFFFFF;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0.5em;
+  user-select: none;
+  ">
+  <div style="
+    background: #101010;
+    border-radius: 0.5em;
+    display: flex;
+    height: 5em;
+    ">
+    <picture>
+        <source srcset="https://mysaml.com/Logo"/>
+        <source srcset="https://mysaml.com/Source/Image/Logo.png"/>
+      <img style="
+        aspect-ratio: 1/1;
+        margin: 0.5em;
+        width: 4em;
+        pointer-events: none;
+        " src="https://mysaml.com/Source/Image/Logo.png" alt="El logo de MySaml"/>
+    </picture>
+    <h1 style="
+      color: #FFB4DC;
+      ">MySaml</h1>
+  </div>
+  <div style="
+    background: #050505;
+    border-radius: 0.5em;
+    margin: 0.5em 0 0 0;
+    padding: 0.5em;
+    ">
+    <h2>Verificación de correo</h2>
+    <p><span style="
+      font-size: 1.25em;
+      ">¡Hola! ${username}</span>, Bienvenido a MySaml.Maven-Repo.</p>
+    <p>Actualmente te has registrado con éxito,
+    </br>queremos verificar que hayas sido tu quien lo hizo,
+    </br>para ello debes abrir el siguiente enlace de verificación.</p>
+    <p>Este enlace expirara: ${expire}</p>
+    <p>ActualTime: ${now}</p>
+    </br>
+    <a style="
+      background: #DCFFB4;
+      border-radius: 1em;
+      color: #101010;
+      display: inline-block;
+      padding: 1em;
+      text-decoration: none;
+      font-weight: bold;
+    " href="${url}?ui=true&token=${token}">Verificar correo</a>
+    </br></br>
+    <!-- <p>si no funciona correctamente el botón usa este
+    </br>
+    <span style="
+      color: #B4DCFF;
+      user-select: all;
+      ">${token}</span>
+    </p><br/> -->
+    <p>Estamos felices de que seas parte de nuestro camino.
+    </br>
+    Nos vemos pronto :p 👋.</p>
+  </div>
+</div>

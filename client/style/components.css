@@ -1,0 +1,15 @@
+@import './components/basic.components.css';
+@import './components/forms.css';
+@import './components/gallery.components.css';
+@import './components/session.components.css';
+
+.InText {
+    border: none;
+    outline-style: none;
+}
+.InText:hover {
+    filter: brightness(0.9);
+}
+.InText:focus {
+    filter: invert(0.75)
+}

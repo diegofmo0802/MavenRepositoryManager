@@ -1,0 +1,42 @@
+.multiTagInput {
+    background-color: #FFFFFF;
+    border: #000000 1px solid;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 0.25rem;
+}
+
+.multiTagInput > .multiTagInput-input {
+    display: block;
+    padding: 0.25rem;
+    background-color: #FFFFFF;
+    border: #000000 1px solid;
+    border-radius: 0.25rem;
+}
+.multiTagInput > .multiTagInput-container {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0 0 0.25rem 0;
+}
+
+.multiTagInput > .multiTagInput-container > .multiTagInput-tag {
+    border: #000000 1px solid;
+    display: block;
+    background-color: #e0e0e0;
+    border: 1px solid #c0c0c0;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    white-space: 0;
+    padding: 0.25rem;
+}
+
+.multiTagInput > .multiTagInput-container > .multiTagInput-tag:hover {
+    background-color: #7F244C44;
+}

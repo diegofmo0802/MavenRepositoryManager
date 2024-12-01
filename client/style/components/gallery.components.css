@@ -1,0 +1,5 @@
+@import './gallery.components/Gallery.css';
+@import './gallery.components/Viewer.css';
+@import './gallery.components/Profile.css';
+@import './gallery.components/UserCard.css';
+@import './gallery.components/UserList.css';

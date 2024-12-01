@@ -5,15 +5,14 @@ export class FileInput extends Component<'div', FileInput.EventMap> {
     protected inputFile: Element<'input'>;
     protected validator: FileInput.validator;
 
-    constructor(options: FileInput.options = {}) {
-        super();
+    constructor(options: FileInput.options = {}) { super();
         const label = options.label ?? 'Choose a file';
         const name = options.name ?? 'fileInput';
-
         this.validator = options.validator ?? ((files: File[]) => true);
+        const id = 'file-input-' + Math.random().toString(36).substring(2, 9);
 
         this.inputFile = Element.new('input').setAttributes({
-            type: 'file', name, id: `file-input-${name}`,
+            type: 'file', name, id,
             hidden: 'true',
         });
 
@@ -23,7 +22,7 @@ export class FileInput extends Component<'div', FileInput.EventMap> {
         }).append(
             Element.structure({
                 type: 'label', text: label,
-                attribs: { for: `file-input-${name}`, class: 'file-input-label' },
+                attribs: { for: id, class: 'file-input-label' },
             }), this.inputFile
         );
 
